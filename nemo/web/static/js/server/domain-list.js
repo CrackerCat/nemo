@@ -49,7 +49,10 @@ $('#domain_table').DataTable(
  },   
  columns:[
    {data: "index", title: "序号"},
-   {data: "domain", title: "域名地址"},
+   {data: "domain", title: "域名地址",
+    render: function(data, type, full, meta){
+        return '<a href="/details?domain=' + data + '">' + data + '</a>'
+    }},
    {data: "ip", title: "IP地址"},
    {data: "title", title: "网站标题"},
    {data: "org_name", title: "所属组织"},
