@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% block css %}
+    <link href="static/css/duallistbox/bootstrap-duallistbox.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<main class="app-content">
+  <div class="app-title">
+    <div>
+      <h1><i class="fa fa-th-list"></i>&nbsp;任务列表</h1>
+      <p></p>
+    </div>
+    <ul class="app-breadcrumb breadcrumb side">
+      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+      <li class="breadcrumb-item"><a href="/index">首页</a></li>
+      <li class="breadcrumb-item active"><a href="#">任务列表</a></li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
+          <div class="table-responsive">
+            <div id="sampleTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+
+                <div class="row"><!-------------ROW 1 :table----------------->
+                  <div class="col-sm-12">
+                    <table class="table table-hover table-bordered dataTable no-footer" id="tasks-table" role="grid" aria-describedby="ip_asset_info">
+                      <thead>
+                        <tr class="text-center">
+                            <th>Name</th>
+                            <th>UUID</th>
+                            <th>State</th>
+                            <th>args</th>
+                            <th>kwargs</th>
+                            <th>Result</th>
+                            <th>Received</th>
+                            <th>Started</th>
+                            <th>Runtime</th>
+                            <!--
+                            <th>Worker</th>
+                            <th>Exchange</th>
+                            <th>Routing Key</th>
+                            <th>Retries</th>
+                            <th>Revoked</th>
+                            <th>Exception</th>
+                            <th>Expires</th>
+                            <th>ETA</th>
+                            -->
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div><!-------------END ROW 1----------------->
+
+          </div>
+        </div> <!-- table responsive-->
+
+
+        </div> <!----tile body-->
+      </div>  <!-- tile -->
+    </div>  <!-- col md-12 -->
+  </div>  <!--row-->
+</main>
+
+{% endblock %}
+
+{% block js %}
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="static/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="static/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script src="static/js/sweetalert/sweetalert.min.js"></script>
+    <script src="static/js/jquery/jquery.bootstrap-duallistbox.js"></script>
+  
+    <script type="text/javascript"> 
+    var language = {//语言设置
+             //"sUrl": "/ip-asset-list",
+             sProcessing: "处理中...",
+             sZeroRecords: "没有匹配结果",
+             sLenthMenu: "每页显示 _MENU_ 条记录",
+             sInfo: "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+             sInfoEmpty: "没有数据",
+             sInfoFiltered: "(获取 _MAX_ 项结果)",
+             sInfoPostFix: "",
+             sSearch: "搜索:",
+             sUrl: "",
+             sEmptyTable: "表中数据为空",
+             sLoadingRecords: "载入中...",
+             sInfoThousands: ",",
+             oPaginate: {
+                 sFirst: "首页",
+                 sPrevious: "上页",
+                 sNext: "下页",
+                 sLast: "末页"
+              }
+          };
+    $(document).ready(function(){
+      $('#tasks-table').DataTable(
+        {
+          "rowID":'uuid',
+          "paging": true,
+          "searching": true,
+          "processing": true,
+          "serverSide": true,
+          "autowidth": false,
+          "sort": true,
+          "language": language,
+          "ajax": {
+                "url": "/task-list",
+                "type": "post"
+          },   
+
+          order: [
+                [7, "asc"]
+            ],
+          
+          columns:[
+                {data: 'name'},
+                {data: 'uuid'},
+                {data: 'state'},
+                {data: 'args'},
+                {data: 'kwargs'},
+                {data: 'result'},
+                {data: 'received'},
+                {data: 'started'},
+                {data: 'runtime'}
+          ]
+        }
+
+      );//end datatable
+    });
+
+        //全选 
+    $('table th input:checkbox').on( 
+            'click', 
+            function() { 
+              var that = this; 
+              $(this).closest('table').find( 
+                  'tr > td:first-child input:checkbox').each( 
+                  function() { 
+                    this.checked = that.checked; 
+                    $(this).closest('tr').toggleClass('selected'); 
+                  }); 
+      
+            }); 
+    </script> 
+{% endblock %}

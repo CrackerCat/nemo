@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block css %}
+    <link href="/static/css/bootstrap-duallistbox/bootstrap-duallistbox.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<main class="app-content">
+  <div class="app-title">
+    <div>
+      <h1><i class="fa fa-th-list"></i>&nbsp;机构列表</h1>
+      <p></p>
+    </div>
+    <ul class="app-breadcrumb breadcrumb side">
+      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+      <li class="breadcrumb-item"><a href="/index">首页</a></li>
+      <li class="breadcrumb-item active"><a href="#">机构列表</a></li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
+          <div class="table-responsive">
+            <div id="sampleTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+
+                <div class="row"><!-------------ROW 1 :table----------------->
+                  <div class="col-sm-12">
+                    <table class="table table-hover table-bordered dataTable no-footer" id="ip_asset_table" role="grid" aria-describedby="ip_asset_info">
+                      <thead>
+                        <tr class="text-center">
+                            <th width="3%">
+                                <input title="checkbox_all" onclick="selectAll()" type="checkbox" name="allSelect" value="1" />
+                            </th> {#1#}
+                            <th width="5%" align="center">序号</th>   {#2#}
+                            <th width="10%" align="center">机构名称</th>  {#3#}
+                            <th width="5%" align="center">状态</th>       {#4#}
+                            <th width="5%" align="center">机构ID</th>       {#4#}
+                            <th width="8%" align="center">创建时间</th>    {#5#}
+                            <th width="8%" align="center">更新时间</th>    {##}
+                            <th width="8%" align="center">操作</th>       {#8#}
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div><!-------------END ROW 1----------------->
+
+          </div>
+        </div> <!-- table responsive-->
+
+
+        </div> <!----tile body-->
+      </div>  <!-- tile -->
+    </div>  <!-- col md-12 -->
+  </div>  <!--row-->
+</main>
+
+{% endblock %}
+
+{% block js %}
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="static/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="static/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script src="static/js/sweetalert/sweetalert.min.js"></script>
+    <script src="static/js/jquery/jquery.bootstrap-duallistbox.js"></script>
+    <script type="text/javascript" src="static/js/server/org-list.js"> </script>
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block css %}
+    <link href="static/css/duallistbox/bootstrap-duallistbox.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<main class="app-content">
+  <div class="app-title">
+    <div>
+      <h1><i class="fa fa-th-list"></i>&nbsp;资产列表</h1>
+      <p></p>
+    </div>
+    <ul class="app-breadcrumb breadcrumb side">
+      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+      <li class="breadcrumb-item"><a href="/index">首页</a></li>
+      <li class="breadcrumb-item active"><a href="#">域名资产</a></li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
+          <div class="form-group row">
+            <button class="btn col-md-2 btn-primary" id="create_task"><i class="fa fa-plus"></i>新建任务</button>
+          </div>
+          <div class="form-group row">
+            <label class="control-label">组织:&nbsp;&nbsp;</label><input class="form-control col-md-2" id="org_name">
+            <label class="control-label">IP:&nbsp;&nbsp;</label><input class="form-control col-md-2" id="ip_address">
+            <label class="control-label">端口:&nbsp;&nbsp;</label><input class="form-control col-md-2" id="port">
+            <button class="btn col-md-2 btn-primary form-control" id="search"><i class="fa fa-search"></i>搜索</button>
+          </div>
+          <div class="table-responsive">
+            <div id="sampleTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+
+                <div class="row"><!-------------ROW 1 :table----------------->
+                  <div class="col-sm-12">
+                    <table class="table table-hover table-bordered dataTable no-footer" id="domain_table" role="grid" aria-describedby="ip_asset_info">
+                      <thead>
+                        <tr class="text-center">
+                            <th width="3%" align="center">序号</th>   {#2#}
+                            <th width="10%" align="center">域名地址</th>  {#3#}
+                            <th width="5%" align="center">IP地址</th>     {#4#}
+                            <th width="8%" align="center">网站标题</th>
+                            <th width="8%" align="center">所属组织</th>    {#8#}
+                            <th width="8%" align="center">更新时间</th>     {#9#}
+                            <th width="6%" align="center">操作</th>       {#11#}
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div><!-------------END ROW 1----------------->
+
+          </div>
+        </div> <!-- table responsive-->
+
+
+        </div> <!----tile body-->
+      </div>  <!-- tile -->
+    </div>  <!-- col md-12 -->
+  </div>  <!--row-->
+</main>
+
+{% endblock %}
+
+{% block js %}
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="static/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="static/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script src="static/js/sweetalert/sweetalert.min.js"></script>
+    <script src="static/js/jquery/jquery.bootstrap-duallistbox.js"></script>
+  
+    <script type="text/javascript" src="static/js/server/domain-list.js"> 
+    </script> 
+{% endblock %}
